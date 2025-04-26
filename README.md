@@ -1,6 +1,7 @@
 # tinyrouter.js
 
-A tiny, vanilla JS client-side router for single-page apps on top of the browser `window.history` API. No dependencies and ~950 bytes minified+gzipped. Ideal for simple vanilla JS single page applications, usage with AplineJS etc.
+A tiny, vanilla JS client-side router for single-page apps on top of the browser's `window.history` API.
+No dependencies and ~950 bytes minified+gzipped. Ideal for simple vanilla JS single-page applications, using with AplineJS etc.
 
 ## Features
 
@@ -8,7 +9,6 @@ A tiny, vanilla JS client-side router for single-page apps on top of the browser
 - Route grouping with shared handlers
 - Support for before/after handler hooks
 - Automatic optional binding to `<a>` and other tags for navigation
-- Minimal footprint (~3KB minified)
 
 [**View demo**](https://knadh.github.io/tinyrouter.js/demo)
 
