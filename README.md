@@ -62,6 +62,8 @@ admin.on('/users/{id}', (ctx) => renderUserEditor(ctx.params.id));
 r.navigate('/users/42', { filter: 'active' }, 'settings');
 ```
 
+See the [demo source](https://github.com/knadh/tinyrouter.js/blob/master/404.html) for a full working example.
+
 ### Link binding
 
 Simply add the `data-route` attribute to links for automatic on-click naviation.
@@ -69,6 +71,7 @@ Simply add the `data-route` attribute to links for automatic on-click naviation.
 ```html
 <a href="/users/42" data-route>View User</a>
 ```
+
 
 ## API
 
