@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>tinyrouter Javascript demo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            max-width: 600px;
+            margin: 30px auto;
+        }
+
+        nav {
+            margin-bottom: 20px;
+        }
+
+        nav a {
+            margin-right: 15px;
+            text-decoration: none;
+            color: blue;
+        }
+
+        #log {
+            width: 100%;
+            height: 200px;
+            font-family: monospace;
+            white-space: pre-wrap;
+        }
+
+        footer {
+            margin-top: 20px;
+            font-size: 0.8em;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>tinyrouter demo</h1>
+    <p>
+        A simple vanilla JS router lib on top of window.history. Supports dynamic routes and grouped routes.
+    </p>
+    <nav>
+        <ul>
+            <li><a href="/" data-route>/</a></li>
+            <li><a href="/users/123" data-route>/users/{id}</a></li>
+            <li><a href="/users/123/objects/image" data-route>/users/{id}/objects/{type}</a></li>
+            <li><a href="/404" data-route>/404</a></li>
+            <hr />
+            <li>/admin group routes<br /></li>
+            <li><a href="/admin/dashboard" data-route>/admin/dashboard</a></li>
+            <li><a href="/admin/panel" data-route>/admin/panel</a></li>
+            <li><a href="/admin/objects/456" data-route>/admin/objects/{id}</a></li>
+        </ul>
+    </nav>
+
+    <textarea id="log"></textarea>
+
+    <script type="module">
+        function log(...args) {
+            const txt = document.getElementById('log');
+            txt.value += `- ${args.join(' ')}\n`;
+            txt.scrollTop = txt.scrollHeight;
+        }
+
+        // Import the tinyrouter module.
+        import router from './tinyrouter.js';
+
+        // Create router instance
+        const r = router.New({
+            defaultHandler: (ctx) => {
+                log('default-handler', ctx.location);
+            },
+        });
+
+        // === Simple routes.
+        // Simple on() callback.
+        r.on('/', (ctx) => log('home', ctx.location));
+
+        r.on('/users/{id}', (ctx) => {
+            log('users-on', ctx.location, 'id =', ctx.params.id)
+        });
+
+        // Optional before() and after() callbacks.
+        r.on('/users/{id}/objects/{type}', {
+            // before: (ctx) => log('users-objects-before'),
+            on: (ctx) => log('users-objects-on', ctx.location, 'id =', ctx.params.id, 'type =', ctx.params.type),
+            // after: (ctx) => log('users-objects-after')
+        });
+
+
+        // === Grouped routes.
+        // Group with /admin prefix and a common callback.
+        const admin = r.group('/admin', {
+            // Optional before() and after() callbacks.
+            // before: (ctx) => log('admin-*-before'),
+            // after: (ctx) => log('admin-*-after')
+        });
+
+        admin.on('/dashboard', (ctx) => log('admin-dashboard-on'));
+        admin.on('/panel', (ctx) => log('admin-dashboard-panel'));
+        admin.on('/objects/{id}', (ctx) => {
+            log('admin-object-on', ctx.location, 'id =', ctx.params.id)
+        });
+
+        // Start the router
+        r.ready();
+    </script>
+
+
+    <footer><a href="https://github.com/knadh/tinyrouter.js">@knadh/tinyrouter.js</a></footer>
+</body>
+
+</html>

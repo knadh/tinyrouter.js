@@ -1,0 +1,31 @@
+{
+    "name": "@knadh/tinyrouter",
+    "version": "1.0.0",
+    "description": "A tiny, zero-dependency lib for frontend routing and navigation on top of `window.history`.",
+    "main": "tinyrouter.js",
+    "files": [
+        "tinyrouter.js"
+    ],
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/knadh/tinyrouter.js.git"
+    },
+    "keywords": [
+        "router",
+        "routing",
+        "history",
+        "spa"
+    ],
+    "author": "Kailash Nadh",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/knadh/tinyrouter.js/issues"
+    },
+    "homepage": "https://github.com/knadh/tinyrouter.js#readme",
+    "publishConfig": {
+        "access": "public"
+    }
+}
