@@ -10,7 +10,7 @@ A tiny, vanilla JS client-side router for single-page apps on top of the browser
 - Automatic optional binding to `<a>` and other tags for navigation
 - Minimal footprint (~3KB minified)
 
-[**View demo**](https://knadh.github.io/tinyrouter.js)
+[**View demo**](https://knadh.github.io/tinyrouter.js/demo)
 
 ## Usage
 

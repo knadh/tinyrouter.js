@@ -44,15 +44,15 @@
     </p>
     <nav>
         <ul>
-            <li><a href="/" data-route>/</a></li>
-            <li><a href="/users/123" data-route>/users/{id}</a></li>
-            <li><a href="/users/123/objects/image" data-route>/users/{id}/objects/{type}</a></li>
-            <li><a href="/404" data-route>/404</a></li>
+            <li><a href="/tinyrouter.js/demo" data-route>/tinyrouter.js/demo/</a></li>
+            <li><a href="/tinyrouter.js/demo/users/123" data-route>/tinyrouter.js/demo/users/{id}</a></li>
+            <li><a href="/tinyrouter.js/demo/users/123/objects/image" data-route>/tinyrouter.js/demo/users/{id}/objects/{type}</a></li>
+            <li><a href="/tinyrouter.js/demo/404" data-route>/tinyrouter.js/demo/404</a></li>
             <hr />
             <li>/admin group routes<br /></li>
-            <li><a href="/admin/dashboard" data-route>/admin/dashboard</a></li>
-            <li><a href="/admin/panel" data-route>/admin/panel</a></li>
-            <li><a href="/admin/objects/456" data-route>/admin/objects/{id}</a></li>
+            <li><a href="/tinyrouter.js/demo/admin/dashboard" data-route>/tinyrouter.js/demo/admin/dashboard</a></li>
+            <li><a href="/tinyrouter.js/demo/admin/panel" data-route>/tinyrouter.js/demo/admin/panel</a></li>
+            <li><a href="/tinyrouter.js/demo/admin/objects/456" data-route>/tinyrouter.js/demo/admin/objects/{id}</a></li>
         </ul>
     </nav>
 
@@ -77,14 +77,14 @@
 
         // === Simple routes.
         // Simple on() callback.
-        r.on('/', (ctx) => log('home', ctx.location));
+        r.on('/tinyrouter.js/demo', (ctx) => log('/tinyrouter.js/demo', ctx.location));
 
-        r.on('/users/{id}', (ctx) => {
+        r.on('/tinyrouter.js/demo/users/{id}', (ctx) => {
             log('users-on', ctx.location, 'id =', ctx.params.id)
         });
 
         // Optional before() and after() callbacks.
-        r.on('/users/{id}/objects/{type}', {
+        r.on('/tinyrouter.js/demo/users/{id}/objects/{type}', {
             // before: (ctx) => log('users-objects-before'),
             on: (ctx) => log('users-objects-on', ctx.location, 'id =', ctx.params.id, 'type =', ctx.params.type),
             // after: (ctx) => log('users-objects-after')
@@ -93,7 +93,7 @@
 
         // === Grouped routes.
         // Group with /admin prefix and a common callback.
-        const admin = r.group('/admin', {
+        const admin = r.group('/tinyrouter.js/demo/admin', {
             // Optional before() and after() callbacks.
             // before: (ctx) => log('admin-*-before'),
             // after: (ctx) => log('admin-*-after')
