@@ -1,6 +1,6 @@
 {
     "name": "@knadh/tinyrouter",
-    "version": "1.1.0",
+    "version": "1.2.0",
     "description": "A tiny, zero-dependency lib for frontend routing and navigation on top of `window.history`.",
     "main": "tinyrouter.js",
     "files": [

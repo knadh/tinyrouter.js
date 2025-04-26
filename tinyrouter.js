@@ -48,7 +48,7 @@ class Router {
 
     // Initialize router and bind events.
     ready() {
-        window.addEventListener('popstate', this._handleNavigation);
+        window.addEventListener('popstate', () => this._handleNavigation());
         this.bind(document);
         this._handleNavigation();
         return this;
