@@ -21,7 +21,7 @@ npm install @knadh/tinyrouter
 ### Basic
 
 ```javascript
-import { router } from @knadh/tinyinput;
+import { router } from @knadh/tinyrouter;
 
 // Create router instance.
 const r = router.New({
