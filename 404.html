@@ -46,13 +46,15 @@
         <ul>
             <li><a href="/tinyrouter.js/demo" data-route>/tinyrouter.js/demo/</a></li>
             <li><a href="/tinyrouter.js/demo/users/123" data-route>/tinyrouter.js/demo/users/{id}</a></li>
-            <li><a href="/tinyrouter.js/demo/users/123/objects/image" data-route>/tinyrouter.js/demo/users/{id}/objects/{type}</a></li>
+            <li><a href="/tinyrouter.js/demo/users/123/objects/image"
+                    data-route>/tinyrouter.js/demo/users/{id}/objects/{type}</a></li>
             <li><a href="/tinyrouter.js/demo/404" data-route>/tinyrouter.js/demo/404</a></li>
             <hr />
             <li>/admin group routes<br /></li>
             <li><a href="/tinyrouter.js/demo/admin/dashboard" data-route>/tinyrouter.js/demo/admin/dashboard</a></li>
             <li><a href="/tinyrouter.js/demo/admin/panel" data-route>/tinyrouter.js/demo/admin/panel</a></li>
-            <li><a href="/tinyrouter.js/demo/admin/objects/456" data-route>/tinyrouter.js/demo/admin/objects/{id}</a></li>
+            <li><a href="/tinyrouter.js/demo/admin/objects/456" data-route>/tinyrouter.js/demo/admin/objects/{id}</a>
+            </li>
         </ul>
     </nav>
 
@@ -69,7 +71,7 @@
         import router from '/tinyrouter.js/tinyrouter.js';
 
         // Create router instance
-        const r = router.New({
+        const r = router.new({
             defaultHandler: (ctx) => {
                 log('default-handler', ctx.location);
             },
@@ -106,6 +108,7 @@
         });
 
         // Start the router
+        r.ready();
         r.ready();
     </script>
 

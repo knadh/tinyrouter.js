@@ -1,5 +1,5 @@
 export default {
-    New: function (options = {}) {
+    new: function (options = {}) {
         return new Router(options);
     }
 };
@@ -48,42 +48,45 @@ class Router {
 
     // Initialize router and bind events.
     ready() {
-        window.removeEventListener('popstate', () => this._handleNavigation());
-        window.addEventListener('popstate', () => this._handleNavigation());
-
-        // Attach click event to elements with the specified attribute.
-        const attrib = this.options.selectorAttrib;
-        if (attrib) {
-            document.querySelectorAll(`[${attrib}]`).forEach(el => {
-                let path = el.dataset[attrib] ? el.dataset[attrib] : el.getAttribute('href');
-
-                // If there's no path or the element was already handled, skip it.
-                if (!path || el.dataset['router']) {
-                    return;
-                }
-                el.dataset['router'] = true;
-
-                el.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    this.navigate(path);
-                });
-            });
-        }
-
+        window.addEventListener('popstate', this._handleNavigation);
+        this.bind(document);
         this._handleNavigation();
         return this;
+    }
+
+    // Bind navigation to elements with the configured attribute.
+    bind(parent) {
+        const attrib = this.options.selectorAttrib;
+        if (!attrib) {
+            return;
+        }
+
+        parent.querySelectorAll(`[${attrib}]`).forEach(el => {
+            let path = el.dataset[attrib] ? el.dataset[attrib] : el.getAttribute('href');
+
+            // If there's no path or the element was already handled, skip it.
+            if (!path || el.dataset['router']) {
+                return;
+            }
+            el.dataset['router'] = true;
+
+            el.addEventListener('click', (e) => {
+                e.preventDefault();
+                this.navigate(path);
+            });
+        });
     }
 
     // Navigate to a URL.
     navigate(path, query = {}, hash = '', pushState = true) {
         const url = this._makeURL(path, query, hash);
-        
+
         // If the current page is the same as the target URL, don't change the history,
         // but execute the handlers.
         if (`${window.location.pathname}${window.location.search}${window.location.hash}` !== url) {
             const method = pushState ? 'pushState' : 'replaceState';
             window.history[method]({}, '', url);
-        }        
+        }
 
         this._handleNavigation();
     }

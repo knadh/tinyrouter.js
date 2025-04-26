@@ -24,7 +24,7 @@ npm install @knadh/tinyrouter
 import router from @knadh/tinyrouter;
 
 // Create router instance.
-const r = router.New({
+const r = router.new({
   defaultHandler: (ctx) => console.log('Route not found', ctx.location.pathname)
 });
 
@@ -82,5 +82,6 @@ Simply add the `data-route` attribute to links for automatic on-click naviation.
 | `r.group(prefix, handlers{})` | Creates a group of routes with a common prefix |
 | `r.ready()` | Initializes the router |
 | `r.navigate(path, query, hash, pushState)` | Navigates to a new route |
+| `r.bind(parent)` | Binds navigate() onclick of all elements in the parent tagged with `data-route` |
 
 Licensed under the MIT License.
