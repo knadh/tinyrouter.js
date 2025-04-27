@@ -158,9 +158,14 @@ class Router {
         };
     }
 
-    // Build complete URL from components.
+    // Build complete URL from components. query should be a URLSearchParams object or a {key:value} object.
     _makeURL(path, query, hash) {
-        const qs = (query instanceof URLSearchParams) ? query.toString() : new URLSearchParams(query).toString();
+        let qs = null;
+
+        if (query) {
+            qs = (query instanceof URLSearchParams) ? query.toString() : new URLSearchParams(query).toString();
+        }
+
         return path + (qs ? `?${qs}` : '') + (hash ? `#${hash}` : '');
     }
 }
