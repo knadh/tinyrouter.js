@@ -1,7 +1,7 @@
 # tinyrouter.js
 
 A tiny, vanilla JS client-side router for single-page apps on top of the browser's `window.history` API.
-No dependencies and ~950 bytes minified+gzipped. Ideal for simple vanilla JS single-page applications, using with AplineJS etc.
+No dependencies and ~950 bytes minified+gzipped. Ideal for simple vanilla JS single-page applications, using with AlpineJS etc.
 
 ## Features
 
