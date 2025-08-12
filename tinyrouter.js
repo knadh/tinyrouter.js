@@ -18,6 +18,8 @@ class Router {
     constructor(options) {
         this.routes = [];
         this.options = { ..._default_options, ...options };
+        // For caching regexes
+        this._regexCache = new Map();
     }
 
     // Register a new route with optional handlers.
@@ -93,13 +95,22 @@ class Router {
 
     // Parse path into regex and parameter names.
     _parsePath(path) {
+        // Check cache first
+        if (this._regexCache.has(path)) {
+            // Exit early if cache hti
+            return this._regexCache.get(path);
+        }
+
         const params = [];
         const regex = new RegExp('^' + path.replace(/\{\w+\}/g, match => {
             params.push(match.slice(1, -1));
             return '([^/]+)';
         }) + '$');
 
-        return { regex, params };
+        const result = { regex, params };
+        // Store if cache miss
+        this._regexCache.set(path, result);
+        return result;
     }
 
     // Handle URL change and execute matching route.
