@@ -68,7 +68,7 @@
         }
 
         // Import the tinyrouter module.
-        import router from '/tinyrouter.js/tinyrouter.js';
+        import router from './tinyrouter.js/tinyrouter.js';
 
         // Create router instance
         const r = router.new({
@@ -85,6 +85,22 @@
             log('users-on', ctx.location, 'id =', ctx.params.id)
         });
 
+        r.beforeEach(()=>{
+            console.log("before each 1")
+        })
+
+        r.beforeEach(()=>{
+            console.log("before each 2")
+        })
+
+        r.afterEach(()=>{
+            console.log("after each 1")
+        })
+
+        r.afterEach(()=>{
+            console.log("after each 2")
+        })
+        
         // Optional before() and after() callbacks.
         r.on('/tinyrouter.js/demo/users/{id}/objects/{type}', {
             // before: (ctx) => log('users-objects-before'),
