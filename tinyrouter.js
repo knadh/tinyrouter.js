@@ -18,6 +18,20 @@ class Router {
     constructor(options) {
         this.routes = [];
         this.options = { ..._default_options, ...options };
+        this.beforeEachHandlers = [];
+        this.afterEachHandlers = [];
+    }
+
+    // Register a beforeEach handler that runs before every navigation.
+    beforeEach(handler) {
+        this.beforeEachHandlers.push(handler);
+        return this;
+    }
+
+    // Register an afterEach handler that runs after every navigation.
+    afterEach(handler) {
+        this.afterEachHandlers.push(handler);
+        return this;
     }
 
     // Register a new route with optional handlers.
@@ -139,12 +153,20 @@ class Router {
         })
     }
 
-    // Execute handlers in sequence: before -> on -> after.
+    // Execute handlers in sequence: beforeEach -> before -> on -> after -> afterEach.
     _execHandlers(handlers, ctx) {
         const chain = [];
+        
+        // Add global beforeEach handlers
+        chain.push(...this.beforeEachHandlers);
+        
+        // Add route-specific handlers
         handlers.before && chain.push(...[handlers.before].flat());
         handlers.on && chain.push(handlers.on);
         handlers.after && chain.push(...[handlers.after].flat());
+        
+        // Add global afterEach handlers
+        chain.push(...this.afterEachHandlers);
 
         chain.forEach(fn => fn && fn(ctx));
     }

@@ -64,6 +64,26 @@ r.navigate('/users/42', { filter: 'active' }, 'settings');
 
 See the [demo source](https://github.com/knadh/tinyrouter.js/blob/master/404.html) for a full working example.
 
+### Global handlers
+
+You can register global handlers that run for every navigation:
+
+```javascript
+// Runs before every route's before/on/after handlers
+r.beforeEach((ctx) => {
+  console.log('global beforeEach', ctx.path, ctx.location.pathname);
+});
+
+// Runs after every route's before/on/after handlers
+r.afterEach((ctx) => {
+  console.log('global afterEach', ctx.path, ctx.location.pathname);
+});
+// Order: global beforeEach -> group before -> route before -> on -> route after -> group after -> global afterEach
+
+```
+
+Multiple `beforeEach` and `afterEach` handlers may be registered; they run in the order they were added.
+
 ### Link binding
 
 Simply add the `data-route` attribute to links for automatic on-click naviation.
@@ -83,5 +103,7 @@ Simply add the `data-route` attribute to links for automatic on-click naviation.
 | `r.ready()` | Initializes the router |
 | `r.navigate(path, query, hash, pushState)` | Navigates to a new route |
 | `r.bind(parent)` | Binds navigate() onclick of all elements in the parent tagged with `data-route` |
+| `r.beforeEach(handler)` | Registers a global handler that runs before every navigation |
+| `r.afterEach(handler)` | Registers a global handler that runs after every navigation |
 
 Licensed under the MIT License.
