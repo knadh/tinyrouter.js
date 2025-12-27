@@ -86,7 +86,7 @@ Multiple `beforeEach` and `afterEach` handlers may be registered; they run in th
 
 ### Link binding
 
-Simply add the `data-route` attribute to links for automatic on-click naviation.
+Simply add the `data-route` attribute to links for automatic on-click navigation.
 
 ```html
 <a href="/users/42" data-route>View User</a>
